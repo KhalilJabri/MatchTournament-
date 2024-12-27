@@ -1,0 +1,187 @@
+Round 1:
+Bayern Munich vs RB Leipzig
+RB Leipzig vs ⁠FC Köln
+Bayer Leverkusen vs Hamburger SV
+Eintracht Frankfurt vs Schalke 04
+Union Berlin vs Hertha Berlin
+Freiburg vs VfB Stuttgart
+VfL Wolfsburg vs Hoffenheim
+Borussia Mönchengladbach vs FC Augsburg
+Mainz 05 vs Werder Bremen
+
+Round 2:
+Bayer Leverkusen vs Bayern Munich
+Bayer Leverkusen vs Borussia Dortmund
+Eintracht Frankfurt vs ⁠FC Köln
+Union Berlin vs Hamburger SV
+Freiburg vs Schalke 04
+VfL Wolfsburg vs Hertha Berlin
+Borussia Mönchengladbach vs VfB Stuttgart
+Mainz 05 vs Hoffenheim
+Werder Bremen vs FC Augsburg
+
+Round 3:
+Bayern Munich vs Eintracht Frankfurt
+Eintracht Frankfurt vs RB Leipzig
+Union Berlin vs Borussia Dortmund
+Freiburg vs ⁠FC Köln
+VfL Wolfsburg vs Hamburger SV
+Borussia Mönchengladbach vs Schalke 04
+Mainz 05 vs Hertha Berlin
+Werder Bremen vs VfB Stuttgart
+FC Augsburg vs Hoffenheim
+
+Round 4:
+Union Berlin vs Bayern Munich
+Union Berlin vs Bayer Leverkusen
+Freiburg vs RB Leipzig
+VfL Wolfsburg vs Borussia Dortmund
+Borussia Mönchengladbach vs ⁠FC Köln
+Mainz 05 vs Hamburger SV
+Werder Bremen vs Schalke 04
+FC Augsburg vs Hertha Berlin
+Hoffenheim vs VfB Stuttgart
+
+Round 5:
+Bayern Munich vs Freiburg
+Freiburg vs Eintracht Frankfurt
+VfL Wolfsburg vs Bayer Leverkusen
+Borussia Mönchengladbach vs RB Leipzig
+Mainz 05 vs Borussia Dortmund
+Werder Bremen vs ⁠FC Köln
+FC Augsburg vs Hamburger SV
+Hoffenheim vs Schalke 04
+VfB Stuttgart vs Hertha Berlin
+
+Round 6:
+VfL Wolfsburg vs Bayern Munich
+VfL Wolfsburg vs Union Berlin
+Borussia Mönchengladbach vs Eintracht Frankfurt
+Mainz 05 vs Bayer Leverkusen
+Werder Bremen vs RB Leipzig
+FC Augsburg vs Borussia Dortmund
+Hoffenheim vs ⁠FC Köln
+VfB Stuttgart vs Hamburger SV
+Hertha Berlin vs Schalke 04
+
+Round 7:
+Bayern Munich vs Borussia Mönchengladbach
+Borussia Mönchengladbach vs Freiburg
+Mainz 05 vs Union Berlin
+Werder Bremen vs Eintracht Frankfurt
+FC Augsburg vs Bayer Leverkusen
+Hoffenheim vs RB Leipzig
+VfB Stuttgart vs Borussia Dortmund
+Hertha Berlin vs ⁠FC Köln
+Schalke 04 vs Hamburger SV
+
+Round 8:
+Mainz 05 vs Bayern Munich
+Mainz 05 vs VfL Wolfsburg
+Werder Bremen vs Freiburg
+FC Augsburg vs Union Berlin
+Hoffenheim vs Eintracht Frankfurt
+VfB Stuttgart vs Bayer Leverkusen
+Hertha Berlin vs RB Leipzig
+Schalke 04 vs Borussia Dortmund
+Hamburger SV vs ⁠FC Köln
+
+Round 9:
+Bayern Munich vs Werder Bremen
+Werder Bremen vs Borussia Mönchengladbach
+FC Augsburg vs VfL Wolfsburg
+Hoffenheim vs Freiburg
+VfB Stuttgart vs Union Berlin
+Hertha Berlin vs Eintracht Frankfurt
+Schalke 04 vs Bayer Leverkusen
+Hamburger SV vs RB Leipzig
+⁠FC Köln vs Borussia Dortmund
+
+Round 10:
+FC Augsburg vs Bayern Munich
+FC Augsburg vs Mainz 05
+Hoffenheim vs Borussia Mönchengladbach
+VfB Stuttgart vs VfL Wolfsburg
+Hertha Berlin vs Freiburg
+Schalke 04 vs Union Berlin
+Hamburger SV vs Eintracht Frankfurt
+⁠FC Köln vs Bayer Leverkusen
+Borussia Dortmund vs RB Leipzig
+
+Round 11:
+Bayern Munich vs Hoffenheim
+Hoffenheim vs Werder Bremen
+VfB Stuttgart vs Mainz 05
+Hertha Berlin vs Borussia Mönchengladbach
+Schalke 04 vs VfL Wolfsburg
+Hamburger SV vs Freiburg
+⁠FC Köln vs Union Berlin
+Borussia Dortmund vs Eintracht Frankfurt
+RB Leipzig vs Bayer Leverkusen
+
+Round 12:
+VfB Stuttgart vs Bayern Munich
+VfB Stuttgart vs FC Augsburg
+Hertha Berlin vs Werder Bremen
+Schalke 04 vs Mainz 05
+Hamburger SV vs Borussia Mönchengladbach
+⁠FC Köln vs VfL Wolfsburg
+Borussia Dortmund vs Freiburg
+RB Leipzig vs Union Berlin
+Bayer Leverkusen vs Eintracht Frankfurt
+
+Round 13:
+Bayern Munich vs Hertha Berlin
+Hertha Berlin vs Hoffenheim
+Schalke 04 vs FC Augsburg
+Hamburger SV vs Werder Bremen
+⁠FC Köln vs Mainz 05
+Borussia Dortmund vs Borussia Mönchengladbach
+RB Leipzig vs VfL Wolfsburg
+Bayer Leverkusen vs Freiburg
+Eintracht Frankfurt vs Union Berlin
+
+Round 14:
+Schalke 04 vs Bayern Munich
+Schalke 04 vs VfB Stuttgart
+Hamburger SV vs Hoffenheim
+⁠FC Köln vs FC Augsburg
+Borussia Dortmund vs Werder Bremen
+RB Leipzig vs Mainz 05
+Bayer Leverkusen vs Borussia Mönchengladbach
+Eintracht Frankfurt vs VfL Wolfsburg
+Union Berlin vs Freiburg
+
+Round 15:
+Bayern Munich vs Hamburger SV
+Hamburger SV vs Hertha Berlin
+⁠FC Köln vs VfB Stuttgart
+Borussia Dortmund vs Hoffenheim
+RB Leipzig vs FC Augsburg
+Bayer Leverkusen vs Werder Bremen
+Eintracht Frankfurt vs Mainz 05
+Union Berlin vs Borussia Mönchengladbach
+Freiburg vs VfL Wolfsburg
+
+Round 16:
+⁠FC Köln vs Bayern Munich
+⁠FC Köln vs Schalke 04
+Borussia Dortmund vs Hertha Berlin
+RB Leipzig vs VfB Stuttgart
+Bayer Leverkusen vs Hoffenheim
+Eintracht Frankfurt vs FC Augsburg
+Union Berlin vs Werder Bremen
+Freiburg vs Mainz 05
+VfL Wolfsburg vs Borussia Mönchengladbach
+
+Round 17:
+Bayern Munich vs Borussia Dortmund
+Borussia Dortmund vs Hamburger SV
+RB Leipzig vs Schalke 04
+Bayer Leverkusen vs Hertha Berlin
+Eintracht Frankfurt vs VfB Stuttgart
+Union Berlin vs Hoffenheim
+Freiburg vs FC Augsburg
+VfL Wolfsburg vs Werder Bremen
+Borussia Mönchengladbach vs Mainz 05
+
