@@ -5,9 +5,9 @@
 #include <cliext/map>
 #include <cliext/utility>
 #include <fstream>
-#include <string>
+//#include <string>
 #include <msclr/marshal_cppstd.h>
-#include <iostream>
+//#include <iostream>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -66,55 +66,57 @@ void Tournament::ReadTeams(String^ filename) {
 // Function for Generating Schedule
 String^ Tournament::GenerateSchedule() {
 
-    int teamsNumber = teams->Count;
+    int number_of_teams = teams->Count;
+    int number_of_rounds = number_of_teams - 1;
+    int half_number = number_of_teams / 2;
 
-    if (teamsNumber % 2 != 0) {
-        Console::WriteLine("the number of teams should be divided by 2, that's why we'll add another imagination word ( passed ) to tell that team is passed");
-        teams->Add("Passed");
-        teamsNumber++;
-    }
+    schedule = gcnew List<List<Match^>^>();
 
-    for (int teamRound = 0; teamRound < teamsNumber - 1; ++teamRound) {
-        List<Match^>^ matchday = gcnew List<Match^>();
+    for (int round_counter = 0; round_counter < number_of_rounds; round_counter++) {
+        List<Match^>^ matches = gcnew List<Match^>();
 
-        for (int i = 0; i < teamsNumber / 2; ++i) {
-            String^ home;
-            String^ away;
-            
-            if (i == 0) {
-                home = teams[0];
-                away = teams[(teamRound + 1) % (teamsNumber - 1) + 1];
+        for (int i = 0; i < half_number; i++) {
+            String^ home = teams[i];
+            String^ away = teams[number_of_teams - i - 1];
+
+            if (round_counter % 2 == 0) {
+                matches->Add(gcnew Match(home, away));
             }
             else {
-                home = teams[(i + teamRound) % (teamsNumber - 1) + 1];
-                away = teams[(teamsNumber - i + teamRound - 1) % (teamsNumber - 1) + 1];
+                matches->Add(gcnew Match(away, home));
             }
-
-            if (teamRound % 2 == 1 && i == 0) {
-                String^ temp = home;
-                home = away;
-                away = temp;
-            }
-
-            matchday->Add(gcnew Match(home, away));
         }
-        schedule->Add(matchday);
+
+
+        schedule->Add(matches);
+
+        // Rotate teams (except the first one)
+        String^ last_team = teams[number_of_rounds];
+        for (int i = number_of_rounds; i > 1; i--) {
+            teams[i] = teams[i - 1];
+        }
+        teams[1] = last_team;
     }
 
+    //return schedule->Count.ToString();
     return "Schedule generated successfully";
 }
 
 // Function to save the schedule on files start
 String^ Tournament::SaveSchedule() {
     for (int matchdayNumber = 0; matchdayNumber < schedule->Count; ++matchdayNumber) {
-        String^ filename = "matchday_" + (matchdayNumber + 1) + ".txt";
-        StreamWriter^ fileWriter = gcnew StreamWriter(filename);
+        String^ firstRound_filename = "matchday_" + (matchdayNumber + 1) + ".txt";
+        String^ secondRound_filename = "matchday_" + (matchdayNumber + 18) + ".txt";
+        StreamWriter^ firstRound_fileWriter = gcnew StreamWriter(firstRound_filename);
+        StreamWriter^ secondRound_fileWriter = gcnew StreamWriter(secondRound_filename);
 
         for each (Match ^ match in schedule[matchdayNumber]) {
-            fileWriter->WriteLine(match->homeTeam + " vs " + match->awayTeam);
+            firstRound_fileWriter->WriteLine(match->homeTeam + " vs " + match->awayTeam);
+            secondRound_fileWriter->WriteLine(match->awayTeam + " vs " + match->homeTeam);
         }
 
-        fileWriter->Close();
+        firstRound_fileWriter->Close();
+        secondRound_fileWriter->Close();
     }
     return "Schedule saved successfully";
 }
@@ -153,61 +155,71 @@ List<String^>^ Tournament::DisplayMatchday(int matchdayNumber) {
     //}
 }
 
-void Tournament::EnterMatchResults(String^ matchdayFile) {
+//String^ Tournament::EnterMatchResults(String^ matchdayFile) {
+//
+//    String^ scoreFileBase = matchdayFile->Replace("matchday_", "score_");
+//    scoreFileBase = scoreFileBase->Replace(".txt", "");
+//    //xx::MyForm^ formInstance = gcnew xx::MyForm();
+//
+//
+//    int fileNumber = 1;
+//    String^ scoreFile = scoreFileBase + ".txt";
+//
+//    StreamReader^ inputFile;
+//    StreamWriter^ outputFile;
+//    try {
+//        inputFile = gcnew StreamReader(matchdayFile);
+//        outputFile = gcnew StreamWriter(scoreFile);
+//    }
+//    catch (Exception^ ex) {
+//        return "Error: Unable to open file(s). Exception: " + ex->Message ;
+//    }
+//
+//    String^ line;
+//    while ((line = inputFile->ReadLine()) != nullptr) {
+//        if (String::IsNullOrWhiteSpace(line)) continue;
+//
+//        // Parse the match line (assumes "TeamA vs TeamB" format)
+//        array<String^>^ parts = line->Split(gcnew array<String^> { " vs " }, StringSplitOptions::None);
+//
+//        String^ teamA = parts[0]->Trim();
+//        String^ teamB = parts[1]->Trim();
+//
+//        int scoreA, scoreB;
+//        Console::WriteLine(String::Format("{0} vs {1}: ", teamA, teamB));
+//        String^ input = Console::ReadLine();
+//        array<String^>^ scores = input->Split(gcnew array<wchar_t> { ' ' }, StringSplitOptions::RemoveEmptyEntries);
+//
+//        if (scores->Length != 2 ||
+//            !Int32::TryParse(scores[0], scoreA) ||
+//            !Int32::TryParse(scores[1], scoreB)) {
+//            Console::WriteLine("Error: Invalid score input. Format should be: scoreA scoreB");
+//            continue;
+//        }
+//
+//        outputFile->WriteLine("{0},{1},{2},{3}", teamA, teamB, scoreA, scoreB);
+//    }
+//
+//    inputFile->Close();
+//    outputFile->Close();
+//
+//    return "Results saved successfully in " + scoreFile;
+//}
 
-    String^ scoreFileBase = matchdayFile->Replace("matchday_", "score_");
-    scoreFileBase = scoreFileBase->Replace(".txt", "");
+String^ Tournament::EnterMatchResults(List<String^>^ scores, String^ match_number) {
+    String^ matchdayFile = "score_" + match_number + ".txt";
+    StreamWriter^ scoreFile = gcnew StreamWriter(matchdayFile);
 
-    int fileNumber = 1;
-    String^ scoreFile = scoreFileBase + ".txt";
+    for each (String ^ score_line in scores) {
 
-    StreamReader^ inputFile;
-    StreamWriter^ outputFile;
-    try {
-        inputFile = gcnew StreamReader(matchdayFile);
-        outputFile = gcnew StreamWriter(scoreFile);
+       scoreFile->WriteLine(score_line);
     }
-    catch (Exception^ ex) {
-        Console::WriteLine("Error: Unable to open file(s). Exception: {0}", ex->Message);
-        return;
-    }
+        
+    scoreFile->Close();
 
-    Console::WriteLine("Enter results for matches in {0} (format: TeamA-TeamB scoreA scoreB):", matchdayFile);
-
-    String^ line;
-    while ((line = inputFile->ReadLine()) != nullptr) {
-        if (String::IsNullOrWhiteSpace(line)) continue;
-
-        // Parse the match line (assumes "TeamA vs TeamB" format)
-        array<String^>^ parts = line->Split(gcnew array<String^> { " vs " }, StringSplitOptions::None);
-        if (parts->Length != 2) {
-            Console::WriteLine("Error: Invalid match format in file: {0}", line);
-            continue;
-        }
-
-        String^ teamA = parts[0]->Trim();
-        String^ teamB = parts[1]->Trim();
-
-        int scoreA, scoreB;
-        Console::Write("{0} vs {1}: ", teamA, teamB);
-        String^ input = Console::ReadLine();
-        array<String^>^ scores = input->Split(gcnew array<wchar_t> { ' ' }, StringSplitOptions::RemoveEmptyEntries);
-
-        if (scores->Length != 2 ||
-            !Int32::TryParse(scores[0], scoreA) ||
-            !Int32::TryParse(scores[1], scoreB)) {
-            Console::WriteLine("Error: Invalid score input. Format should be: scoreA scoreB");
-            continue;
-        }
-
-        outputFile->WriteLine("{0},{1},{2},{3}", teamA, teamB, scoreA, scoreB);
-    }
-
-    inputFile->Close();
-    outputFile->Close();
-
-    Console::WriteLine("Results saved successfully in {0}.", scoreFile);
+    return "Results saved successfully in " + matchdayFile;
 }
+
 
 Tournament::MatchScore^ FindMatchScore(List<Tournament::MatchScore^>^ matchs, String^ teamName) {
     for each (Tournament::MatchScore ^ match in matchs) {

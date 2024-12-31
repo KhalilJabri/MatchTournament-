@@ -52,6 +52,7 @@ public:
     String^ GenerateSchedule();
     String^ SaveSchedule();
     List<String^>^ DisplayMatchday(int round);
-    void EnterMatchResults(String^ matchdayFile);
+    //String^ EnterMatchResults(String^ matchdayFile);
+    String^ EnterMatchResults(List<String^>^ scores, String^ match_number);
     List<Tournament::MatchScore^>^ DisplayRankings(int fileNumero);
 };

@@ -1,6 +1,18 @@
 #pragma once
 #include "Tournament.h"
 
+#include <cliext/vector>
+#include <cliext/map>
+#include <cliext/utility>
+#include <fstream>
+//#include <string>
+#include <msclr/marshal_cppstd.h>
+//#include <iostream>
+
+using namespace System;
+using namespace System::Collections::Generic;
+using namespace cliext;
+using namespace System::IO;
 
 namespace xx {
 
@@ -39,7 +51,8 @@ namespace xx {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
-
+	private: System::Windows::Forms::Button^ button7;
+	private: String^ match_number;
 
 
 
@@ -65,6 +78,7 @@ namespace xx {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -79,7 +93,7 @@ namespace xx {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(107, 203);
+			this->textBox1->Location = System::Drawing::Point(113, 214);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
@@ -136,11 +150,23 @@ namespace xx {
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(293, 159);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(108, 39);
+			this->button7->TabIndex = 7;
+			this->button7->Text = L"button7";
+			button7->Visible = false;
+			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &MyForm::button7_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(749, 448);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -212,6 +238,62 @@ namespace xx {
 	}
 
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		textBox1->ReadOnly = false;
+		match_number = textBox1->Text;
+
+		try {
+			String^ matchdayFile = "matchday_" + match_number + ".txt";
+			StreamReader^ inputFile = gcnew StreamReader(matchdayFile);
+			textBox1->Clear();
+			String^ line;
+			while ((line = inputFile->ReadLine()) != nullptr) {
+				if (String::IsNullOrWhiteSpace(line)) continue;
+
+				// Parse the match line (assumes "TeamA vs TeamB" format)
+				array<String^>^ parts = line->Split(gcnew array<String^> { " vs " }, StringSplitOptions::None);
+
+				String^ teamA = parts[0]->Trim();
+				String^ teamB = parts[1]->Trim();
+
+				textBox1->AppendText(String::Format("{0} vs {1} :", teamA, teamB ) + Environment::NewLine);
+			}
+			button7->Visible = true;
+
+		}
+		catch (Exception^ ex) {
+			textBox1->ReadOnly = false;
+			textBox1->Clear();
+			textBox1->AppendText("there is something wrong: write the number of the match day you want to score ");
+		}
+	}
+
+	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
+		textBox1->ReadOnly = false;
+		String^ numberMatchday = textBox1->Text;
+		try {
+			List<String^>^ teamsScore = gcnew List<String^>();;
+			//int scoreA, scoreB;
+			array<String^>^ lines = textBox1->Lines;
+
+			for each (String^ line in lines) {
+				if (!String::IsNullOrWhiteSpace(line)) {
+					array<String^>^ parts = line->Split(gcnew array<String^> { ":" }, StringSplitOptions::None);
+					array<String^>^ teamsName = parts[0]->Split(gcnew array<String^> { " vs " }, StringSplitOptions::None);
+					array<String^>^ scores = parts[1]->Split(gcnew array<wchar_t> { ' ' }, StringSplitOptions::RemoveEmptyEntries);
+					String^ match_line = String::Format(teamsName[0] + "," + teamsName[1] + "," + scores[0] + "," + scores[1]);
+					teamsScore->Add(match_line);
+				}
+			}
+			String^ msg = tournament->EnterMatchResults(teamsScore, match_number);
+			textBox1->Clear();
+			textBox1->AppendText(msg);
+			button7->Visible = false;
+
+		} catch (Exception^ ex) {
+			textBox1->ReadOnly = false;
+			textBox1->Clear();
+			textBox1->AppendText("you should set the score correctly!");
+		}
 	}
 
 	private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {

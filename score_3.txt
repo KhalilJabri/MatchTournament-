@@ -1,0 +1,9 @@
+Bayern Munich,Schalke 04,5,6
+Hamburger SV,Hertha Berlin,6,2
+⁠FC Köln,VfB Stuttgart,7,8
+Borussia Dortmund,Hoffenheim,1,6
+RB Leipzig,FC Augsburg,2,3
+Bayer Leverkusen,Werder Bremen,4,8
+Eintracht Frankfurt,Mainz 05,2,3
+Union Berlin,Borussia Mönchengladbach,4,5
+Freiburg,VfL Wolfsburg,1,2
