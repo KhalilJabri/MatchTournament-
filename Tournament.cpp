@@ -5,50 +5,22 @@
 #include <cliext/map>
 #include <cliext/utility>
 #include <fstream>
-//#include <string>
 #include <msclr/marshal_cppstd.h>
-//#include <iostream>
+
 
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace cliext;
 using namespace System::IO;
 
-// Constructor for Match struct
+// Constructor for Match struct Spielstruktur wird konstruiert
 Tournament::Match::Match(String^ home, String^ away)
     : homeTeam(home), awayTeam(away), homeScore(-1), awayScore(-1) {
 }
 
-//Tournament::MatchScore::MatchScore(String^ teamNote, int scoreNote) {
-//    team = teamNote;
-//    score = scoreNote;
-//}
-//
-//void Tournament::MatchScore::AddNewGoals(int goals) {
-//    score += goals;
-//}
-
 Tournament::Tournament() {
     teams = gcnew List<String^>();
     schedule = gcnew List<List<Match^>^>();
-}
-
-// Function to create a file with teams name
-void Tournament::CreateTeamsFile(String^ filename) {
-    StreamWriter^ writer = gcnew StreamWriter(filename);
-    Console::WriteLine("Enter the number of teams:");
-    int numTeams;
-    Int32::TryParse(Console::ReadLine(), numTeams);
-
-    for (int i = 0; i < numTeams; i++) {
-        Console::Write("Enter team name " + (i + 1) + ": ");
-        String^ teamName = Console::ReadLine();
-        writer->WriteLine(teamName);
-        teams->Add(teamName);
-    }
-
-    writer->Close();
-    Console::WriteLine("Teams saved to file.");
 }
 
 // Function to read team from file text
@@ -63,43 +35,50 @@ void Tournament::ReadTeams(String^ filename) {
     file->Close();
 }
 
-// Function for Generating Schedule
+// Function for Generating Schedule 
 String^ Tournament::GenerateSchedule() {
-
-    int number_of_teams = teams->Count;
-    int number_of_rounds = number_of_teams - 1;
-    int half_number = number_of_teams / 2;
-
-    schedule = gcnew List<List<Match^>^>();
-
-    for (int round_counter = 0; round_counter < number_of_rounds; round_counter++) {
-        List<Match^>^ matches = gcnew List<Match^>();
-
-        for (int i = 0; i < half_number; i++) {
-            String^ home = teams[i];
-            String^ away = teams[number_of_teams - i - 1];
-
-            if (round_counter % 2 == 0) {
-                matches->Add(gcnew Match(home, away));
-            }
-            else {
-                matches->Add(gcnew Match(away, home));
-            }
-        }
-
-
-        schedule->Add(matches);
-
-        // Rotate teams (except the first one)
-        String^ last_team = teams[number_of_rounds];
-        for (int i = number_of_rounds; i > 1; i--) {
-            teams[i] = teams[i - 1];
-        }
-        teams[1] = last_team;
+    if (teams == nullptr || teams->Count < 2) {
+        return "Not enough teams to generate a schedule.";
     }
 
-    //return schedule->Count.ToString();
-    return "Schedule generated successfully";
+    Random^ random = gcnew Random(); // Random Objekt wurde erzeugt
+    schedule = gcnew List<List<Match^>^>();
+
+    // Shuffle teams list
+    List<String^>^ shuffledTeams = gcnew List<String^>(teams);
+    for (int i = 0; i < shuffledTeams->Count; i++) {
+        int randomIndex = random->Next(i, shuffledTeams->Count);
+        String^ temp = shuffledTeams[i];
+        shuffledTeams[i] = shuffledTeams[randomIndex];
+        shuffledTeams[randomIndex] = temp;
+    }
+
+    int numRounds = shuffledTeams->Count - 1;
+    int numMatchesPerRound = shuffledTeams->Count / 2;
+
+    // Generate schedule with random pairings
+    for (int round = 0; round < numRounds; round++) {
+        List<Match^>^ roundMatches = gcnew List<Match^>();
+
+        // Copy the shuffled teams for pairing
+        List<String^>^ tempTeams = gcnew List<String^>(shuffledTeams);
+
+        while (tempTeams->Count >= 2) {
+            int homeIndex = random->Next(tempTeams->Count);
+            String^ homeTeam = tempTeams[homeIndex];
+            tempTeams->RemoveAt(homeIndex);
+
+            int awayIndex = random->Next(tempTeams->Count);
+            String^ awayTeam = tempTeams[awayIndex];
+            tempTeams->RemoveAt(awayIndex);
+
+            roundMatches->Add(gcnew Match(homeTeam, awayTeam));
+        }
+
+        schedule->Add(roundMatches);
+    }
+
+    return "Randomized schedule generated successfully.";
 }
 
 // Function to save the schedule on files start
@@ -118,14 +97,14 @@ String^ Tournament::SaveSchedule() {
         firstRound_fileWriter->Close();
         secondRound_fileWriter->Close();
     }
-    return "Schedule saved successfully";
+    return "Rangliste erfolgreich gespeichert";
 }
 
 // Function to display matches for a specific round
 List<String^>^ Tournament::DisplayMatchday(int matchdayNumber) {
     List<String^>^ matchList = gcnew List<String^>();
     try {
-        String^ filename = "matchday_" + (matchdayNumber) + ".txt";
+        String^ filename = "matchday_" + (matchdayNumber)+".txt";
         StreamReader^ file = gcnew StreamReader(filename);
         String^ line;
 
@@ -139,72 +118,7 @@ List<String^>^ Tournament::DisplayMatchday(int matchdayNumber) {
     catch (Exception^ e) {
         return nullptr;
     }
-
-    /*if (round < 1 || round > schedule->Count) {
-        Console::WriteLine("Invalid round number.");
-        return nullptr;
-    }*/
-
-    //for each (Match ^ match in schedule[round - 1]) {
-    //    //Console::Write(match->homeTeam + " vs " + match->awayTeam);
-    //    matchList->Add(match->homeTeam + " vs " + match->awayTeam);
-    //    //if (match->homeScore != -1 && match->awayScore != -1) {
-    //    //    Console::Write(" (" + match->homeScore + " - " + match->awayScore + ")");
-    //    //}
-    //    //Console::WriteLine();
-    //}
 }
-
-//String^ Tournament::EnterMatchResults(String^ matchdayFile) {
-//
-//    String^ scoreFileBase = matchdayFile->Replace("matchday_", "score_");
-//    scoreFileBase = scoreFileBase->Replace(".txt", "");
-//    //xx::MyForm^ formInstance = gcnew xx::MyForm();
-//
-//
-//    int fileNumber = 1;
-//    String^ scoreFile = scoreFileBase + ".txt";
-//
-//    StreamReader^ inputFile;
-//    StreamWriter^ outputFile;
-//    try {
-//        inputFile = gcnew StreamReader(matchdayFile);
-//        outputFile = gcnew StreamWriter(scoreFile);
-//    }
-//    catch (Exception^ ex) {
-//        return "Error: Unable to open file(s). Exception: " + ex->Message ;
-//    }
-//
-//    String^ line;
-//    while ((line = inputFile->ReadLine()) != nullptr) {
-//        if (String::IsNullOrWhiteSpace(line)) continue;
-//
-//        // Parse the match line (assumes "TeamA vs TeamB" format)
-//        array<String^>^ parts = line->Split(gcnew array<String^> { " vs " }, StringSplitOptions::None);
-//
-//        String^ teamA = parts[0]->Trim();
-//        String^ teamB = parts[1]->Trim();
-//
-//        int scoreA, scoreB;
-//        Console::WriteLine(String::Format("{0} vs {1}: ", teamA, teamB));
-//        String^ input = Console::ReadLine();
-//        array<String^>^ scores = input->Split(gcnew array<wchar_t> { ' ' }, StringSplitOptions::RemoveEmptyEntries);
-//
-//        if (scores->Length != 2 ||
-//            !Int32::TryParse(scores[0], scoreA) ||
-//            !Int32::TryParse(scores[1], scoreB)) {
-//            Console::WriteLine("Error: Invalid score input. Format should be: scoreA scoreB");
-//            continue;
-//        }
-//
-//        outputFile->WriteLine("{0},{1},{2},{3}", teamA, teamB, scoreA, scoreB);
-//    }
-//
-//    inputFile->Close();
-//    outputFile->Close();
-//
-//    return "Results saved successfully in " + scoreFile;
-//}
 
 String^ Tournament::EnterMatchResults(List<String^>^ scores, String^ match_number) {
     String^ matchdayFile = "score_" + match_number + ".txt";
@@ -212,14 +126,13 @@ String^ Tournament::EnterMatchResults(List<String^>^ scores, String^ match_numbe
 
     for each (String ^ score_line in scores) {
 
-       scoreFile->WriteLine(score_line);
+        scoreFile->WriteLine(score_line);
     }
-        
+
     scoreFile->Close();
 
     return "Results saved successfully in " + matchdayFile;
 }
-
 
 Tournament::MatchScore^ FindMatchScore(List<Tournament::MatchScore^>^ matchs, String^ teamName) {
     for each (Tournament::MatchScore ^ match in matchs) {
@@ -233,10 +146,10 @@ Tournament::MatchScore^ FindMatchScore(List<Tournament::MatchScore^>^ matchs, St
 List<Tournament::MatchScore^>^ SortMatch(List<Tournament::MatchScore^>^ matchs) {
     Tournament::MatchScore^ aux;
 
-    for(int i = 0; i < matchs->Count-1; i++) {
-        for (int j = i+1; j < matchs->Count; j++) {
+    for (int i = 0; i < matchs->Count - 1; i++) {
+        for (int j = i + 1; j < matchs->Count; j++) {
 
-            if ( matchs[i]->score < matchs[j]->score ) {
+            if (matchs[i]->score < matchs[j]->score) {
                 aux = matchs[i];
                 matchs[i] = matchs[j];
                 matchs[j] = aux;
@@ -275,15 +188,25 @@ List<Tournament::MatchScore^>^ Tournament::DisplayRankings(int fileNumero) {
                 firstMatch = gcnew Tournament::MatchScore(firstTeam, 0);
                 matchday->Add(firstMatch);
             }
-            firstMatch->AddNewGoals(firstScore);
 
             // Update team B's score
             Tournament::MatchScore^ secondMatch = FindMatchScore(matchday, secondTeam);
-            if(secondMatch == nullptr) {
+            if (secondMatch == nullptr) {
                 secondMatch = gcnew Tournament::MatchScore(secondTeam, 0);
                 matchday->Add(secondMatch);
             }
-            secondMatch->AddNewGoals(secondScore);
+
+			if (firstScore > secondScore) {
+				firstMatch->AddNewGoals(3);
+			}
+			else if (firstScore < secondScore) {
+				secondMatch->AddNewGoals(3);
+			}
+			else {
+				firstMatch->AddNewGoals(1);
+				secondMatch->AddNewGoals(1);
+			}
+
         }
 
         scoreFile->Close();
@@ -297,5 +220,3 @@ List<Tournament::MatchScore^>^ Tournament::DisplayRankings(int fileNumero) {
         Console::WriteLine("{0}: {1} goals", matchScore->team, matchScore->score);
     }*/
 }
-
-

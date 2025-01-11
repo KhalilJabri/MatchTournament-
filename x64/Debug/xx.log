@@ -1,6 +1,39 @@
-﻿  Tournament.cpp
-C:\Users\khalil\source\repos\xx\xx\Tournament.cpp(139,23): warning C4101: 'e': unreferenced local variable
+﻿  MyForm.cpp
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(209,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/MyForm.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(239,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/MyForm.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(270,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/MyForm.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(299,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/MyForm.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(319,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/MyForm.cpp')
+  
+  Tournament.cpp
+C:\Users\khalil\source\repos\xx\xx\Tournament.cpp(118,23): warning C4101: 'e': unreferenced local variable
   (compiling source file '/Tournament.cpp')
   
+  xx.cpp
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(209,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/xx.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(239,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/xx.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(270,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/xx.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(299,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/xx.cpp')
+  
+C:\Users\khalil\source\repos\xx\xx\MyForm.h(319,21): warning C4101: 'ex': unreferenced local variable
+  (compiling source file '/xx.cpp')
+  
+  Generating Code...
   AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   xx.vcxproj -> C:\Users\khalil\source\repos\xx\x64\Debug\xx.exe

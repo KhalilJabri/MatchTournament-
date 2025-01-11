@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 ref class Tournament {
-//public:
+    //public:
 public:
     ref struct MatchScore {
         String^ team;
@@ -47,12 +47,11 @@ public:
 public:
     Tournament();
 
-    void CreateTeamsFile(String^ filename);
     void ReadTeams(String^ filename);
     String^ GenerateSchedule();
     String^ SaveSchedule();
     List<String^>^ DisplayMatchday(int round);
-    //String^ EnterMatchResults(String^ matchdayFile);
+    //void EnterMatchResults(String^ matchdayFile);
     String^ EnterMatchResults(List<String^>^ scores, String^ match_number);
     List<Tournament::MatchScore^>^ DisplayRankings(int fileNumero);
 };

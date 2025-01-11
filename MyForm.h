@@ -1,27 +1,31 @@
 #pragma once
 #include "Tournament.h"
-
-#include <cliext/vector>
-#include <cliext/map>
-#include <cliext/utility>
-#include <fstream>
-//#include <string>
 #include <msclr/marshal_cppstd.h>
+
+
+//#include <cliext/vector>
+//#include <cliext/map>
+//#include <cliext/utility>
+//#include <fstream>
+//#include <string>
+//#include <msclr/marshal_cppstd.h>
 //#include <iostream>
 
 using namespace System;
-using namespace System::Collections::Generic;
-using namespace cliext;
+using namespace System::Windows::Forms;
+//using namespace System::Collections::Generic;
+//using namespace cliext;
 using namespace System::IO;
 
-namespace xx {
 
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
+namespace ITProjektaktuell {
+
+	//using namespace System;
+	//using namespace System::ComponentModel;
+	//using namespace System::Collections;
+	//using namespace System::Windows::Forms;
+	//using namespace System::Data;
+	//using namespace System::Drawing;
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -51,8 +55,9 @@ namespace xx {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
-	private: System::Windows::Forms::Button^ button7;
 	private: String^ match_number;
+	private: System::Windows::Forms::Button^ button7;
+
 
 
 
@@ -62,7 +67,7 @@ namespace xx {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -83,80 +88,80 @@ namespace xx {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(152, 37);
+			this->button1->Location = System::Drawing::Point(132, 42);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(121, 40);
+			this->button1->Size = System::Drawing::Size(136, 46);
 			this->button1->TabIndex = 0;
-			this->button1->Text = L"read teams";
+			this->button1->Text = L"Teams einlesen";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(113, 214);
+			this->textBox1->Location = System::Drawing::Point(132, 257);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->textBox1->Size = System::Drawing::Size(470, 222);
+			this->textBox1->Size = System::Drawing::Size(492, 241);
 			this->textBox1->TabIndex = 1;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(293, 37);
+			this->button2->Location = System::Drawing::Point(274, 42);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(108, 40);
+			this->button2->Size = System::Drawing::Size(174, 46);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"Generate schedule";
+			this->button2->Text = L"Spielplan erstellen";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(152, 102);
+			this->button3->Location = System::Drawing::Point(132, 107);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(121, 40);
+			this->button3->Size = System::Drawing::Size(136, 52);
 			this->button3->TabIndex = 3;
-			this->button3->Text = L"Display matchday";
+			this->button3->Text = L"Spieltag anzeigen";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(432, 37);
+			this->button4->Location = System::Drawing::Point(467, 42);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(111, 40);
+			this->button4->Size = System::Drawing::Size(145, 46);
 			this->button4->TabIndex = 4;
-			this->button4->Text = L"Save schedule";
+			this->button4->Text = L"Spielplan speichern";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(293, 102);
+			this->button5->Location = System::Drawing::Point(274, 107);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(108, 40);
+			this->button5->Size = System::Drawing::Size(174, 52);
 			this->button5->TabIndex = 5;
-			this->button5->Text = L"Enter Match results";
+			this->button5->Text = L"Ergebnisse eintragen";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(432, 102);
+			this->button6->Location = System::Drawing::Point(467, 107);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(111, 40);
+			this->button6->Size = System::Drawing::Size(145, 52);
 			this->button6->TabIndex = 6;
-			this->button6->Text = L"Display ranking";
+			this->button6->Text = L"Tabelle anzeigen";
 			this->button6->UseVisualStyleBackColor = true;
 			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(293, 159);
+			this->button7->Location = System::Drawing::Point(274, 184);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(108, 39);
+			this->button7->Size = System::Drawing::Size(174, 42);
 			this->button7->TabIndex = 7;
-			this->button7->Text = L"button7";
+			this->button7->Text = L"Ergebnisse speichern";
 			button7->Visible = false;
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &MyForm::button7_Click);
@@ -165,7 +170,7 @@ namespace xx {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(749, 448);
+			this->ClientSize = System::Drawing::Size(778, 532);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
@@ -188,8 +193,10 @@ namespace xx {
 
 	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		textBox1->ReadOnly = false;
+		//textBox1->Text = "teams.txt";
 		String^ filename = textBox1->Text;
 		textBox1->Clear();
+
 
 		try {
 			tournament->ReadTeams(filename);
@@ -255,7 +262,7 @@ namespace xx {
 				String^ teamA = parts[0]->Trim();
 				String^ teamB = parts[1]->Trim();
 
-				textBox1->AppendText(String::Format("{0} vs {1} :", teamA, teamB ) + Environment::NewLine);
+				textBox1->AppendText(String::Format("{0} vs {1} :", teamA, teamB) + Environment::NewLine);
 			}
 			button7->Visible = true;
 
@@ -266,7 +273,6 @@ namespace xx {
 			textBox1->AppendText("there is something wrong: write the number of the match day you want to score ");
 		}
 	}
-
 	private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
 		textBox1->ReadOnly = false;
 		String^ numberMatchday = textBox1->Text;
@@ -275,7 +281,7 @@ namespace xx {
 			//int scoreA, scoreB;
 			array<String^>^ lines = textBox1->Lines;
 
-			for each (String^ line in lines) {
+			for each (String ^ line in lines) {
 				if (!String::IsNullOrWhiteSpace(line)) {
 					array<String^>^ parts = line->Split(gcnew array<String^> { ":" }, StringSplitOptions::None);
 					array<String^>^ teamsName = parts[0]->Split(gcnew array<String^> { " vs " }, StringSplitOptions::None);
@@ -289,7 +295,8 @@ namespace xx {
 			textBox1->AppendText(msg);
 			button7->Visible = false;
 
-		} catch (Exception^ ex) {
+		}
+		catch (Exception^ ex) {
 			textBox1->ReadOnly = false;
 			textBox1->Clear();
 			textBox1->AppendText("you should set the score correctly!");
@@ -302,7 +309,7 @@ namespace xx {
 		try {
 			List<Tournament::MatchScore^>^ matchList = tournament->DisplayRankings(Int32::Parse(numberMatchday));
 			textBox1->Clear();
-			for each (Tournament::MatchScore^ matchScore in matchList) {
+			for each (Tournament::MatchScore ^ matchScore in matchList) {
 				String^ matchResult = matchScore->team + " : " + matchScore->score + "goals";
 				textBox1->AppendText(matchResult + Environment::NewLine);
 			}
@@ -315,5 +322,5 @@ namespace xx {
 			textBox1->AppendText("Error: you need to enter the match day number where you want to see the score!!");
 		}
 	}
-};
+	};
 }
